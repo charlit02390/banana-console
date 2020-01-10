@@ -1,0 +1,15 @@
+.title{
+    background-color: #FFC300 ;
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+.sel-mul{
+    text-align: center;
+    width: 100%;
+    overflow-y: scroll;
+    height: 150px;
+    font-size: 20px;
+}
+
