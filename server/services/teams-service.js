@@ -35,6 +35,10 @@ function addTeam(data) {
     logger.debug('add team');
     try {
         result = await(teamsRepository.addTeam(data));
+        for (var i = 0; i < data.members.length; i++) {
+            result = await(teamsRepository.addTeamMember())
+        }
+        
     } catch (error) {
         throw error;
     }
