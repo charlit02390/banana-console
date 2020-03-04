@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title>Mantenimiento de Cables</mat-card-title>
+    <mat-card-content>
+        <button mat-raised-button color="primary" (click)="OpenPanel()"
+                    [attr.aria-expanded]="!isCollapsed" role="button"  aria-controls="addCable" >
+               <mat-icon mat-list-icon>shuffle</mat-icon>Nuevo Cable
+            </button>
+    <app-cable-mant (addCable)="addCable($event)" (editCable)="updateCableSave($event)" [selectedCable]="selectedCable" [isCollapsed]="isCollapsed" (revertCable)="resetPage($event)"[blocks]="blocks"></app-cable-mant>
+    <app-cable-display [data]="cables" (editRow)="updateCable($event)" (deleteRow)="deleteCable($event)"></app-cable-display>
+</mat-card-content>
+</mat-card>
+

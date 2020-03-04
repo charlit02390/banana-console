@@ -7,7 +7,7 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class ReadRfidComponent implements OnInit {
 
-    @Input() title: any;
+  @Input() title: any;
 
   constructor() { }
 

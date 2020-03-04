@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-content>
+        <div class="collapse spacer" id="addFarm" [collapse]="isCollapsed" >
+            <form [formGroup]="farmForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="idfarms" formControlName="idfarms">
+                    <label for="nameFarm">Nombre:</label>
+                    <input type="text" class="form-control" id="nameFarm" formControlName="name">
+                    <label for="addressFarm">Dirección:</label>
+                    <input type="text" class="form-control" id="addressFarm" formControlName="address">
+                    
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!farmForm.valid">Guardar</button>
+                <button type="button" mat-raised-button color="accent" (click)="revert()" >Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

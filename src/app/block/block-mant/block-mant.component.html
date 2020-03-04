@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-content>
+        <div class="collapse spacer" id="addBlock" [collapse]="isCollapsed" >
+            <form [formGroup]="blockForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="idblocks" formControlName="idblocks">
+                    <label for="nameBlock">Nombre:</label>
+                    <input type="text" class="form-control" id="nameBlock" formControlName="name">
+                    <label for="descriptionBlock">Descripción:</label>
+                    <input type="text" class="form-control" id="descriptionBlock" formControlName="description">
+                    <label for="farm">Finca:</label>
+                    <select class="form-control" id="idfarm" formControlName="idfarm"  >
+                        <option *ngFor="let farm of farms" [ngValue]="farm.idfarms" >{{ farm.name }}</option>
+                    </select> 
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!blockForm.valid">Guardar</button>
+                <button type="button" mat-raised-button color="accent" (click)="revert()" >Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,12 @@
+<mat-card>
+    <mat-card-title>Mantenimiento de Bloques</mat-card-title>
+    <mat-card-content>
+        <button mat-raised-button color="primary" (click)="OpenPanel()"
+                    [attr.aria-expanded]="!isCollapsed" role="button"  aria-controls="addBlock" >
+               <mat-icon mat-list-icon>view_comfy</mat-icon>Nuevo Bloque 
+            </button>
+    <app-block-mant (addBlock)="addBlock($event)" (editBlock)="updateBlockSave($event)" [selectedBlock]="selectedBlock" [isCollapsed]="isCollapsed" (revertBlock)="resetPage($event)"[farms]="farms"></app-block-mant>
+    <app-block-display [data]="blocks" (editRow)="updateBlock($event)" (deleteRow)="deleteBlock($event)"></app-block-display>
+</mat-card-content>
+</mat-card>
+

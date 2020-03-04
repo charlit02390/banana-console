@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-title>Mantenimiento de Fincas</mat-card-title>
+    <mat-card-content>
+        <button mat-raised-button color="primary" (click)="OpenPanel()"
+                    [attr.aria-expanded]="!isCollapsed" role="button"  aria-controls="addFarm" >
+               <mat-icon mat-list-icon>landscape</mat-icon>Nueva Finca 
+            </button>
+    <app-farm-mant (addFarm)="addFarm($event)" (editFarm)="updateFarmSave($event)" [selectedFarm]="selectedFarm" [isCollapsed]="isCollapsed" (revertFarm)="resetPage($event)"></app-farm-mant>
+    <app-farm-display [data]="farms" (editRow)="updateFarm($event)" (deleteRow)="deleteFarm($event)"></app-farm-display>
+</mat-card-content>
+</mat-card>

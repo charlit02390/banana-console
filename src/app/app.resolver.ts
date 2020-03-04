@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { DataService } from './core';
+import { DataService } from './services';
 import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, Resolve } from '@angular/router';
 import { RequestOptions } from '@angular/http';
 import { CacheService } from 'ng2-cache';
 import { Subject } from 'rxjs/Subject';
  
-
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CsrfResolver implements Resolve<any> {
@@ -19,7 +17,7 @@ export class CsrfResolver implements Resolve<any> {
         private cacheService: CacheService) {}
 
     public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<any> {
-        return this.dataService.get('token')
+        return this.dataService.get('token').toPromise()
             .then(response => {
                 this.setToken(response.csrfToken);
                 return response;
@@ -28,7 +26,8 @@ export class CsrfResolver implements Resolve<any> {
 
     private setToken(token) {
         this.cacheService.set('csrfToken', token);
-        this.requestOptions.headers.set('x-csrf-token', token);
+        this.requestOptions.headers.set('CSRF-TOKEN', token);
+        this.requestOptions.headers.set('Content-Type', 'application/json');
         this.csrfObservable.next(true);
     }
 }

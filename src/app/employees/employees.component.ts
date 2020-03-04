@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
-import { DataService } from '../core/';
+import { DataService } from '../services/';
 import { Employee } from '../models/employee'
 
 @Component({
@@ -15,6 +15,7 @@ export class EmployeesComponent implements OnInit {
     public roles;
     public isCollapsed = true;
 
+   
     employees = [{
         idemployees:1,
         name:'Carlos',
@@ -48,10 +49,7 @@ export class EmployeesComponent implements OnInit {
     constructor(private fb: FormBuilder, private dataService: DataService) { }
 
     getRoles(){
-        this.dataService.get('api/static/roles')
-            .then(response => {
-                  this.roles = response.roles;
-            });
+       
     }
 
     getUsers(){

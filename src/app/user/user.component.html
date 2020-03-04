@@ -1,66 +1,12 @@
-<div class="container">
-    <h1>Usuarios</h1>
-     
-    <button class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed" role="button"  aria-controls="addUser" *ngIf="selection.selected.length < 2">
-       {{ btnFunctionLabel }}
-    </button>
-    <button type="button" class="btn btn-danger" *ngIf="selection.selected.length > 0"  (click)="deleteUsers()" >Eliminar Usuario</button>
-    <div class="collapse spacer" id="addUser" [collapse]="isCollapsed" >
-        <form [formGroup]="userForm" (ngSubmit)="btnAction()">
-            <div class="form-group">
-                <input type="hidden" class="form-control" id="idusers" formControlName="idUsers">
-                <label for="usernameUser">Username:</label>
-                <input type="text" class="form-control" id="usernameUser" formControlName="userName">
-                <label for="passwordUser">Password:</label>
-                <input type="password" class="form-control" id="passwordUser" formControlName="password">
-                <label for="emailUser">Email:</label>
-                <input type="email" class="form-control" id="emailUser" formControlName="email">
-                <label for="nameUser">Nombre:</label>
-                <input type="text" class="form-control" id="nameUser" formControlName="name">
-                <label for="lastNameUser">Apellidos:</label>
-                <input type="text" class="form-control" id="lastNameUser" formControlName="lastName">
-                <label for="role">Role:</label>
-                <select class="form-control" id="roles" formControlName="idroles"  >
-                    <option *ngFor="let role of roles" [ngValue]="role.idroles" >{{ role.name }}</option>
-                </select> 
-            </div>
-            <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">{{btnSubmitLabel}}</button>
-        </form>
-
-    </div>
-    <div class=spacer>
-        <h3>Lista de Usuarios</h3>
-         <table  mat-table [dataSource]="dataSource" class="table mat-elevation-z8">
-            <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                        [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()">
-                    </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()"
-                        (change)="selectionChange(row)"
-                        [checked]="selection.isSelected(row)">
-                    </mat-checkbox>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="userName">
-                <th scope="col" mat-header-cell *matHeaderCellDef> Nombre de Usuario </th>
-                <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-            </ng-container>
-            <ng-container matColumnDef="email">
-                <th scope="col" mat-header-cell *matHeaderCellDef> Email </th>
-                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-            </ng-container>
-            <ng-container matColumnDef="role">
-                <th  scope="col" mat-header-cell *matHeaderCellDef> Role </th>
-                <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
-</div>
+<mat-card>
+    <mat-card-title>Mantenimiento de Usuarios</mat-card-title>
+    <mat-card-content>
+        <button mat-raised-button color="primary" (click)="OpenPanel()"
+                    [attr.aria-expanded]="!isCollapsed" role="button"  aria-controls="addUser" >
+               <mat-icon mat-list-icon>person_add</mat-icon>Nuevo Usuario 
+            </button>
+    <app-user-mant (addUser)="addUser($event)" (editUser)="updateUserSave($event)" [selectedUser]="selectedUser" [isCollapsed]="isCollapsed" (revertUser)="resetPage($event)"[roles]="roles"></app-user-mant>
+    <app-user-display [data]="users" (editRow)="updateUser($event)" (deleteRow)="deleteUser($event)"></app-user-display>
+</mat-card-content>
+</mat-card>
 

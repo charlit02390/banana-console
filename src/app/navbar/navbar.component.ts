@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { AuthService } from '../auth'
 
 @Component({
@@ -7,18 +7,13 @@ import { AuthService } from '../auth'
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  isLogged = false;
-  labelLogin = 'Registrarse';
-  returnUrl: string;
+  @Input() menuName : string;
+  
 
   constructor(public authService: AuthService) { }
 
     ngOnInit() {
-    }
-
-    logout(){
-        localStorage.removeItem('currentUser');  
+      console.log(this.menuName);
     }
 
 }

@@ -1,6 +1,15 @@
-<app-navbar ></app-navbar>    
-
-<div style="padding-top: 70px">
-    <router-outlet></router-outlet>
+<div  class="mat-app-background">
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <div>BananaConsole</div>
+    </mat-toolbar>
+    <mat-sidenav-container>
+        <mat-sidenav #snav>
+            <app-sidenav></app-sidenav> 
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>
 

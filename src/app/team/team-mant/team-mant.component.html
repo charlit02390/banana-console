@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-content>
+        <div class="collapse spacer" id="addTeam" [collapse]="isCollapsed" >
+            <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="idteams" formControlName="idteams">
+                    <label for="nameTeam">Nombre:</label>
+                    <input type="text" class="form-control" id="nameTeam" formControlName="name">
+                    <label for="role">Miembros:</label>
+                    <mat-select class="form-control" id="members" formControlName="members" multiple >
+                        <mat-option *ngFor="let user of users" [value]="user" >{{ user.name +' '+ user.lastname }}</mat-option>
+                    </mat-select> 
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!teamForm.valid">Guardar</button>
+                <button type="button" mat-raised-button color="accent" (click)="revert()" >Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,38 @@
+<mat-nav-list>
+    <mat-list-item mat-list-item  routerLink="">
+        <span>Home</span>
+        <mat-icon mat-list-icon>home</mat-icon>
+    </mat-list-item>
+</mat-nav-list>
+<mat-nav-list>
+    <mat-list-item mat-list-item routerLink="workflow">
+        <span >Workflow</span>
+        <mat-icon mat-list-icon>dashboard</mat-icon>
+    </mat-list-item>
+</mat-nav-list>
+<mat-nav-list>
+    <mat-list-item mat-list-item (click)="showSubmenuFinca = !showSubmenuFinca">
+        <span>Config. Fincas</span>
+        <mat-icon mat-list-icon>settings_applications</mat-icon>
+        <mat-icon class="menu-button">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu" [hidden]="!showSubmenuFinca"[ngClass]="{'expanded' : showSubmenuFinca}">
+        <a mat-list-item routerLink="farm" ><mat-icon mat-list-icon>landscape</mat-icon>Fincas</a>
+        <a mat-list-item routerLink="block" > <mat-icon mat-list-icon>view_comfy</mat-icon>Bloques</a>
+        <a mat-list-item routerLink= "cable"> <mat-icon mat-list-icon>shuffle</mat-icon>Cables</a>
+        <a mat-list-item routerLink= "team"><mat-icon mat-list-icon>group_work</mat-icon>Cuadrillas</a>
+    </div>
+</mat-nav-list>
+
+<mat-nav-list>
+    <mat-list-item mat-list-item (click)="showSubmenuConfig = !showSubmenuConfig">
+        <span>Config. General</span>
+        <mat-icon mat-list-icon>settings</mat-icon>
+        <mat-icon class="menu-button">expand_more</mat-icon>
+    </mat-list-item>
+    <div class="submenu" [hidden]="!showSubmenuConfig"[ngClass]="{'expanded' : showSubmenuConfig}">
+        <a mat-list-item routerLink="user"><mat-icon mat-list-icon>people</mat-icon>Usuarios</a>
+        
+    </div>
+</mat-nav-list>
+

@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-card-content>
+        <div class="collapse spacer" id="addCable" [collapse]="isCollapsed" >
+            <form [formGroup]="cableForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="idcables" formControlName="idcables">
+                    <label for="nameCable">Valor:</label>
+                    <input type="text" class="form-control" id="nameCable" formControlName="value">
+                    <label for="DescriptionCable">Descripción:</label>
+                    <input type="text" class="form-control" id="DescriptionCable" formControlName="description">
+                    
+                    <label for="role">Bloque:</label>
+                    <select class="form-control" id="idblock" formControlName="idblock" >
+                        <option *ngFor="let block of blocks" [ngValue]="block.idblocks" >{{ block.name }}</option>
+                    </select> 
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!cableForm.valid">Guardar</button>
+                <button type="button" mat-raised-button color="accent" (click)="revert()" >Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

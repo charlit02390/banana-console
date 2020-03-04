@@ -8,9 +8,9 @@ import {
     ResponseContentType
 } from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
@@ -32,26 +32,27 @@ export class DataService {
 
         options = new RequestOptions({ search: params });
         return this.http.get(url, options)
-            .map(response => response.json());
+            .pipe(map(response => response.json()));
     }
 
 
     public post(url: string, element: any): Promise<any> {
-        return this.http.post(url, element)
+        return this.http.post(url, JSON.stringify(element))
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.handleError);
     }
 
     public put(url: string, element: any): Promise<any> {
-        return this.http.put(url, element)
+        console.log('element',element);
+        return this.http.put(url, JSON.stringify(element))
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.handleError);
     }
 
     public postFile(url: string, element: any): Promise<any> {
-        return this.http.post(url, element, { responseType: ResponseContentType.Blob })
+        return this.http.post(url, JSON.stringify(element), { responseType: ResponseContentType.Blob })
             .toPromise()
             .then(response => response.json() as any)
             .catch(this.handleError);
@@ -64,11 +65,11 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    public get(url: string): Promise<any> {
+    public get(url: string): Observable<any> {
+        console.log('url',url);
         return this.http.get(url)
-            .toPromise()
-            .then(response => response.json() as any)
-            .catch(this.handleError);
+            .pipe(map(response => response.json()))
+            .pipe(catchError((e: any) => { console.log(e); return Observable.throw(e || 'Internal Server error');}));
     }
 
     public delete(url: string, element?: any): Promise<any> {

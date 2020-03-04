@@ -1,0 +1,35 @@
+<mat-card>
+    <mat-card-content>
+        <div class="collapse spacer" id="addUser" [collapse]="isCollapsed" >
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="hidden" class="form-control" id="idusers" formControlName="idusers">
+                    <label for="nameUser">Nombre:</label>
+                    <input type="text" class="form-control" id="nameUser" formControlName="name">
+                    <label for="lastNameUser">Apellidos:</label>
+                    <input type="text" class="form-control" id="lastNameUser" formControlName="lastname">
+                    <label for="dniUser">Cédula:</label>
+                    <input type="text" class="form-control" id="dniUser" formControlName="dni">
+                    <label for="usernameUser">Username:</label>
+                    <input type="text" class="form-control" id="usernameUser" formControlName="username">
+                    <label for="passwordUser">Password:</label>
+                    <input type="password" class="form-control" id="passwordUser" formControlName="password">
+                    <label for="emailUser">Email:</label>
+                    <input type="email" class="form-control" id="emailUser" formControlName="email">
+                    <label for="phoneUser">Telefono:</label>
+                    <input type="text" class="form-control" id="phoneUser" formControlName="phone">
+                    <label for="nationalityUser">Nacionalidad:</label>
+                    <select class="form-control" id="nationality" formControlName="nationality"  >
+                        <option *ngFor="let data of nationalities" [ngValue]="data.id" >{{ data.name }}</option>
+                    </select>
+                    <label for="role">Role:</label>
+                    <select class="form-control" id="idrole" formControlName="idrole"  >
+                        <option *ngFor="let role of roles" [ngValue]="role.idroles" >{{ role.name }}</option>
+                    </select> 
+                </div>
+                <button type="submit" mat-raised-button color="primary" [disabled]="!userForm.valid">Guardar</button>
+                <button type="button" mat-raised-button color="accent" (click)="revert()" >Cancel</button>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>
